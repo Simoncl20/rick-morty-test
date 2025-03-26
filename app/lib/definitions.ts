@@ -10,7 +10,13 @@ export interface CharacterQuery {
 export interface CharactersResponse {
     info: Info
     results: Result[]
-  }
+}
+
+export interface ErrorResponse {
+    error: boolean
+    status: number
+    message: string
+}
   
 export interface Info {
     count: number
@@ -43,4 +49,32 @@ export interface Location {
     name: string
     url: string
   }
-  
+
+export const speciesOptions = [
+  'None',
+  'Alien',
+  'Animal',
+  'Cronenberg',
+  'Disease',
+  'Human',
+  'Humanoid',
+  'Mythological Creature',
+  'Poopybutthole',
+  'Robot',
+  'unknown'
+]
+
+export const statusOptions = [
+  "None",
+  "Alive", 
+  "Dead",
+  "Unknown"
+]
+
+export const genderOptions = [
+  "None",
+  "Female",
+  "Male",
+  "Genderless",
+  "Unknow"
+]

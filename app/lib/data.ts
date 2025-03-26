@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { CharacterQuery, CharactersResponse } from "./definitions";
+import { CharacterQuery, CharactersResponse , ErrorResponse} from "./definitions";
 
 export async function getCharacters(
     query: CharacterQuery,
@@ -21,7 +21,7 @@ export async function getCharacters(
                 error: true,
                 status: 404,
                 message: 'No se encontraron personajes con esos criterios'
-            };
+            } as ErrorResponse;
         }
         
         console.error('Fetch Error', error);

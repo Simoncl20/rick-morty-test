@@ -9,7 +9,7 @@ export interface CharacterQuery {
 
 export interface CharactersResponse {
     info: Info
-    results: Result[]
+    results: CharacterInfo[]
 }
 
 export interface ErrorResponse {
@@ -25,7 +25,7 @@ export interface Info {
     prev: string
   }
   
-export interface Result {
+export interface CharacterInfo {
     id: number
     name: string
     status: string

@@ -25,7 +25,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
   }, 400);
 
   return (
-    <div className="relative w-64">
+    <div className="relative w-80">
       <div className="relative">
         <input
           className="w-full px-4 py-3 text-left bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 pl-10"

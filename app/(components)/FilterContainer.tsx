@@ -21,7 +21,7 @@ export default function FilterContainer() {
   }
   
   return (
-    <div className="flex justify-center gap-2.5 w-full">
+    <div className="flex justify-center gap-x-6 w-full">
       <Search placeholder="Filter by name..." />
       <Filter 
         options={speciesOptions} 

@@ -48,7 +48,7 @@ const Filter = ({
   };
 
   return (
-    <div className="relative w-64">
+    <div className="relative w-80">
       <button
         className="w-full px-4 py-3 text-left bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
         onClick={onToggle}

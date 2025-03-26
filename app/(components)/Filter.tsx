@@ -1,59 +1,63 @@
-'use client'
+"use client";
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React, { useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { useState } from "react";
+import { IconChevronDown } from '@tabler/icons-react';
 
 interface FilterProps {
   options: string[];
   placeholder?: string;
   typeParam: string;
+  isOpen: boolean;
+  onToggle: () => void;
 }
 
-const Filter = ({ options = [],  placeholder = 'Select an option' , typeParam}: FilterProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('');
+const Filter = ({
+  options = [],
+  placeholder = "Select an option",
+  typeParam,
+  isOpen,
+  onToggle
+}: FilterProps) => {
+  const [selectedOption, setSelectedOption] = useState("");
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
 
   const handleOptionClick = (option: string) => {
+    // Cerrar el dropdown después de seleccionar una opción
+    onToggle();
+    const params = new URLSearchParams(searchParams);
+    
     if (option === selectedOption) {
-      setIsOpen(false);
-      return;
-    } else if (option === 'None') {
-      setIsOpen(false);
-      setSelectedOption(placeholder);
       return;
     }
     
-    setSelectedOption(option);
-    setIsOpen(false);
-    console.log(`Filtering by ${option}`);
-    const params = new URLSearchParams(searchParams);
-    params.set('page', '1');
-    if (option) {
-      params.set(typeParam, option);
-    } else if (option === 'None') {
+    params.set("page", "1");
+    
+    if (option === "None") {
       params.delete(typeParam);
+      setSelectedOption(placeholder);
     } else {
-      params.delete(typeParam);
+      params.set(typeParam, option);
+      setSelectedOption(option);
     }
-
+    
+    console.log(`Filtering by ${option}`);
     replace(`${pathname}?${params.toString()}`);
-
   };
 
   return (
     <div className="relative w-64">
-      <button 
-        className="w-full px-4 py-2 text-left bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-        onClick={() => setIsOpen(!isOpen)}
+      <button
+        className="w-full px-4 py-3 text-left bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+        onClick={onToggle}
       >
-        {selectedOption || placeholder}
+        <span className={selectedOption ? (selectedOption == placeholder ? "text-gray-400" : "text-gray-900")  : "text-gray-400"}>
+          {selectedOption || placeholder}
+        </span>
         <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-          <svg className="w-5 h-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-          </svg>
+          <IconChevronDown color="gray"/>
         </span>
       </button>
 
@@ -61,9 +65,9 @@ const Filter = ({ options = [],  placeholder = 'Select an option' , typeParam}: 
         <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
           <ul className="py-1 overflow-auto text-base max-h-60">
             {options.map((option, index) => (
-              <li 
+              <li
                 key={index}
-                className="px-4 py-2 text-gray-900 cursor-pointer hover:bg-blue-100"
+                className="px-4 py-3 text-gray-900 cursor-pointer hover:bg-green-100"
                 onClick={() => handleOptionClick(option)}
               >
                 {option}
@@ -76,4 +80,4 @@ const Filter = ({ options = [],  placeholder = 'Select an option' , typeParam}: 
   );
 };
 
-export default Filter
+export default Filter;

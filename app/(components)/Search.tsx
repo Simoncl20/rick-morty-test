@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
+import { IconSearch } from '@tabler/icons-react';
 
 export default function Search({ placeholder }: { placeholder: string }) {
   const searchParams = useSearchParams();
@@ -16,15 +17,16 @@ export default function Search({ placeholder }: { placeholder: string }) {
     params.set('page', '1');
 
     if (term) {
-      params.set('query', term);
+      params.set('name', term);
     } else {
-      params.delete('query');
+      params.delete('name');
     }
     replace(`${pathname}?${params.toString()}`);
-  }, 200);
+  }, 400);
 
   return (
     <div className="relative flex flex-1 flex-shrink-0">
+      
       <label htmlFor="search" className="sr-only">
         Search
       </label>
@@ -36,6 +38,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
         }}
         defaultValue={searchParams.get('query')?.toString()}
       />
+      <IconSearch className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900"/>
     </div>
   );
 }

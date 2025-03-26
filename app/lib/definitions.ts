@@ -1,50 +1,46 @@
-// Characters Endpoint Types
+// Characters EndPoint
 
-export interface Welcome {
-    info:    Info;
-    results: Result[];
+export interface CharacterQuery {
+    name?: string
+    status?: string
+    species?: string
+    gender?: string
 }
 
+export interface CharactersResponse {
+    info: Info
+    results: Result[]
+  }
+  
 export interface Info {
-    count: number;
-    pages: number;
-    next:  string;
-    prev:  null;
-}
-
+    count: number
+    pages: number
+    next: string
+    prev: string
+  }
+  
 export interface Result {
-    id:       number;
-    name:     string;
-    status:   Status;
-    species:  Species;
-    type:     string;
-    gender:   Gender;
-    origin:   Location;
-    location: Location;
-    image:    string;
-    episode:  string[];
-    url:      string;
-    created:  Date;
-}
-
-export enum Gender {
-    Female = "Female",
-    Male = "Male",
-    Unknown = "unknown",
-}
-
+    id: number
+    name: string
+    status: string
+    species: string
+    type: string
+    gender: string
+    origin: Origin
+    location: Location
+    image: string
+    episode: string[]
+    url: string
+    created: string
+  }
+  
+export interface Origin {
+    name: string
+    url: string
+  }
+  
 export interface Location {
-    name: string;
-    url:  string;
-}
-
-export enum Species {
-    Alien = "Alien",
-    Human = "Human",
-}
-
-export enum Status {
-    Alive = "Alive",
-    Dead = "Dead",
-    Unknown = "unknown",
-}
+    name: string
+    url: string
+  }
+  

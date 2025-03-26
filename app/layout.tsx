@@ -10,7 +10,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "Rick & Morty API Explorer",
-  description: "Tech Interview Project for Guarapo Dev | Rick & Morty API Explorer",
+  description: "Tech Interview Project for Guarapo Labs | Rick & Morty API Explorer",
 };
 
 export default function RootLayout({
